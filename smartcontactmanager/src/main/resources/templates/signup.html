@@ -18,12 +18,83 @@
 <body>
 
 	<section>
-		<h1>signup!</h1>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3 mt-3">
+
+					<div class="my-card ">
+
+						<div th:if="${session.message}"
+							th:classappend="${session.message.type}" class="alert"
+							role="alert">
+							<p class="text-center" th:text="${session.message.content}">
+							</p>
+							<th:block th:text="${#session.removeAttribute('message')}">
+							</th:block>
+						</div>
+
+						<h1 class="text-center">Register here</h1>
+
+						<form action="" th:action="@{/do_register}" method="post"
+							th:object="${user}">
+
+							<!-- name field -->
+							<div class="form-group">
+								<label for="name_field">Name</label> <input name="name"
+									type="text" class="form-control" id="name_field"
+									aria-describedby="nameHelp" placeholder="Enter Name" required
+									th:value="${user.name}" />
+							</div>
+
+							<!-- email field -->
+							<div class="form-group">
+								<label for="email_field">Email</label> <input name="email"
+									type="email" class="form-control" id="email_field"
+									aria-describedby="emailHelp" placeholder="Enter Email" required
+									th:value="${user.email}" />
+							</div>
+
+							<!-- password field -->
+							<div class="form-group">
+								<label for="password_field">Password</label> <input
+									name="password" type="password" class="form-control"
+									id="password_field" aria-describedby="passwordHelp"
+									placeholder="Enter password" required />
+							</div>
+
+							<!-- user about field -->
+							<div class="form-group">
+								<textarea name="about" th:value="${user.about}" id="" rows="8"
+									class="form-control"
+									placeholder="enter something about yourself"></textarea>
+							</div>
+
+							<!-- terms and conditions -->
+
+							<div class="form-group form check text-center">
+								<input name="agreement" type="checkbox" class="form-check-input"
+									id="agreement" /> <label for="agreement">Accept terms
+									and condition</label>
+
+							</div>
+
+							<div class="container text-center">
+								<button type="submit"
+									class="btn bg-primary btn-block text-white btn-lg">Submit</button>
+
+								<button type="reset"
+									class="btn btn-warning btn-block text-white btn-lg">Reset</button>
+
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
 	</section>
-
-
-
-
 
 	<!-- Optional JavaScript; choose one of the two! -->
 
@@ -35,8 +106,6 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
 		crossorigin="anonymous"></script>
-
-
 
 	<!-- Option 2: jQuery, Popper.js, and Bootstrap JS
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
