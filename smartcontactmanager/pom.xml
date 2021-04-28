@@ -13,7 +13,9 @@
 	<artifactId>smartcontactmanager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>smartcontactmanager</name>
-	<description>first spring boot project using jpa hibernate, thymeleaf, spring security</description>
+	<description>first spring boot project using jpa hibernate, thymeleaf,
+		spring security
+	</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -46,6 +48,19 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.2.0.Final</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

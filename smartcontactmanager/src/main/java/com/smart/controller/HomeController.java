@@ -1,10 +1,12 @@
 package com.smart.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,7 +44,7 @@ public class HomeController {
 //	handler for register
 
 	@RequestMapping(value = "/do_register", method = RequestMethod.POST)
-	public String registerUrl(@ModelAttribute("user") User user,
+	public String registerUrl(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
 			@RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model model,
 			HttpSession session) {
 
@@ -51,6 +53,12 @@ public class HomeController {
 			if (!agreement) {
 				System.out.println("you have not agreed the terms and conditions");
 				throw new Exception("you have not agreed the terms and conditions");
+			}
+//			server side validation
+			if (bindingResult.hasErrors()) {
+				System.out.println("ERROR " + bindingResult.toString());
+				model.addAttribute("user", user);
+				return "signup";
 			}
 
 			user.setRole("ROLE_USER");
@@ -67,7 +75,8 @@ public class HomeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("user", user);
-			session.setAttribute("message", new Message("something went wrong ", "alert-danger"));
+			session.setAttribute("message",
+					new Message("something went wrong not selected terms and conditions ", "alert-danger"));
 			return "signup";
 		}
 
