@@ -4,9 +4,11 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +23,9 @@ public class HomeController {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	@RequestMapping(value = "/")
 	public String home(Model model) {
@@ -42,7 +47,6 @@ public class HomeController {
 	}
 
 //	handler for register
-
 	@RequestMapping(value = "/do_register", method = RequestMethod.POST)
 	public String registerUrl(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
 			@RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model model,
@@ -63,6 +67,8 @@ public class HomeController {
 
 			user.setRole("ROLE_USER");
 			user.setEnabled(true);
+			user.setImageUrl("banner.jpg");
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
 
 			System.out.println("Agreement " + agreement);
 			System.out.println("user " + user);
@@ -82,4 +88,12 @@ public class HomeController {
 
 	}
 
+//	handler for custom login
+
+	@GetMapping("/signin")
+	public String customLogin(Model model) {
+		model.addAttribute("title", "Login Page");
+
+		return "login";
+	}
 }
