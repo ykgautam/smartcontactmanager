@@ -26,7 +26,7 @@
 <body>
 	<!-- navbar begins -->
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-primary">
 
 		<a class="navbar-brand" href="#">Smart Contact Manager</a>
 
@@ -58,15 +58,17 @@
 	<!-- navbar ends here -->
 
 	<!-- sidebar begins here -->
-	<div class="sidebar">
+	<div class="sidebar mt-3">
 		<div onclick="toggleSidebar()" class="crossBtn">&times;</div>
 
-		<a href="#" class="item"><i class="fas fa-home"></i> Home</a> <a
-			href="#" class="item"><i class="fas fa-address-book"></i> View
-			Contacts</a> <a href="#" class="item"><i class="fas fa-edit"></i> Add
-			Contact</a> <a href="#" class="item"><i class="fas fa-user-circle"></i>
-			Your profile</a> <a href="#" class="item"><i class="fas fa-user-cog"></i>
-			Settings</a> <a href="#" class="item"><i class="fas fa-sign-out-alt"></i>
+		<a href="#" th:href="@{/user/index}" class="item"><i
+			class="fas fa-home"></i> Home</a> <a href="#" class="item"><i
+			class="fas fa-address-book"></i> View Contacts</a> <a href="#"
+			th:href="@{/user/add-contact}" class="item"><i
+			class="fas fa-edit"></i> Add Contact</a> <a href="#" class="item"><i
+			class="fas fa-user-circle"></i> Your profile</a> <a href="#" class="item"><i
+			class="fas fa-user-cog"></i> Settings</a> <a href="#"
+			th:href="@{/logout}" class="item"><i class="fas fa-sign-out-alt"></i>
 			Logout</a>
 
 		<div class="divider"></div>
@@ -76,9 +78,20 @@
 	<!-- END sidebar -->
 
 	<!-- content area starts here -->
-	<div class="content">
+	<div class="content mt-5">
 
 		<i onclick="toggleSidebar()" class="fas fa-bars m-3"></i>
+
+		<!-- message box -->
+		<div th:if="${session.message}" class="container text-center">
+			<div th:classappend="${'alert-'+session.message.type}" class="alert"
+				role="alert">
+				<span th:text="${session.message.content}"></span>
+			</div>
+			<
+			<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+		</div>
+
 		<div th:replace="${content}"></div>
 
 	</div>

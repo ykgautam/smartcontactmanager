@@ -4,6 +4,7 @@ const toggleSidebar = () => {
 	if ($('.sidebar').is(":visible")) {
 		//  true 
 		// band krna hai
+		
 		$('.sidebar').css("display", "none")
 		$('.content').css("margin-left", "0%")
 

@@ -123,10 +123,11 @@ public class Contact {
 		this.user = users;
 	}
 
-	@Override
-	public String toString() {
-		return "Contact [cid=" + cid + ", name=" + name + ", secondName=" + secondName + ", work=" + work + ", email="
-				+ email + ", phone=" + phone + ", image=" + image + ", description=" + description + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Contact [cid=" + cid + ", name=" + name + ", secondName=" + secondName + ", work=" + work + ", email="
+//				+ email + ", phone=" + phone + ", image=" + image + ", description=" + description + ", user=" + user
+//				+ "]";
+//	}
 
 }
