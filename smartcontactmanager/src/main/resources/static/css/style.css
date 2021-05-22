@@ -99,3 +99,11 @@ body {
 	width: 80%;
 }
 /* sidebar end */
+
+.profile_pic{
+	width: 30px;
+	object-fit:cover; /* pic fits without stretch  */
+	border-radius:50%;
+	border:1px solid black;
+}
+
